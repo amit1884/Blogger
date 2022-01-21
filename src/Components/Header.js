@@ -12,7 +12,7 @@ function Header() {
       </div>
       <div className="links">
         <GoogleLogin
-          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+          clientId={process.env.REACT_APP_CLIENT_ID}
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
