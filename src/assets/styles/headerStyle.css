@@ -1,6 +1,12 @@
 .header-container {
   width: 100vw;
-  background-color: lightgray;
-  color: #000;
+  background-color: transparent;
+  color: #fff;
   padding: 10px 30px;
+}
+.header-container-dark {
+  color: #000 !important;
+}
+.header-container .brand p {
+  font-size: 30px;
 }
