@@ -7,8 +7,7 @@ import PostsList from "../Components/PostsList";
 function Blogs() {
   return (
     <Container className="d-flex flex-column bg-secondary">
-      <Header className="header-container-dark" />
-      <hr />
+      <Header />
       <main className="d-flex main">
         <BlogDetails />
         <PostsList />
