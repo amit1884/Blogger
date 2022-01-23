@@ -18,7 +18,7 @@ function Header(props) {
   };
   return (
     <div
-      className={`header-container d-flex align-items-center justify-content-around`}
+      className={`header-container d-flex align-items-center justify-content-around ${props?.className}`}
     >
       <div className="brand">
         <p>Blogger</p>

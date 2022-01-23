@@ -14,14 +14,14 @@ const AllRoutes = () => {
 
   useEffect(() => {
     const token = Cookies.get("accessToken");
-    const userData = JSON.parse(Cookies.get("userData"));
-    console.log(userData, token);
     if (token) {
+      const userData = JSON.parse(Cookies.get("userData"));
+
       dispatch({ type: "USER", payload: userData });
     } else {
       navigate("/", { replace: true });
     }
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <Routes>

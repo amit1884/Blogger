@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   position: relative;
+  margin-top: 60px;
 }
 .lg-heading {
   color: #fff;
@@ -21,29 +22,60 @@
 .main {
   width: 100vw;
   padding: 10px;
+  position: relative;
 }
 .blog-section {
   width: 30%;
   height: 100%;
-  border-right: 1px solid lightgray;
-  background-color: #fff;
-  border-radius: 7px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  border-right: 2px solid lightgray;
 }
 .posts-section {
-  width: 70%;
+  margin-left: 320px;
+  margin-top: 60px;
 }
-.blog-section-header {
-  padding: 10px;
-  font-size: 20px;
-  border-bottom: 1px solid grey;
-  margin: 10px auto;
-}
+
 .blog-list {
-  padding: 10px auto;
-  margin: 10px 3px;
+  padding: 2px;
 }
-.blog-section .blog-list ul li {
-  border: 1px solid orange;
-  padding: 10px;
-  margin: 8px auto;
+.blog-list li {
+  padding: 10px 10px;
+  cursor: pointer;
+}
+.blog-list li:hover {
+  background-color: gainsboro;
+}
+.post-header {
+  padding: 5px;
+  border-bottom: 1px solid orange;
+}
+.posts-list {
+  margin-top: 20px;
+}
+
+.post-thumbnail {
+  width: 15%;
+  background-color: orangered;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+.post-content {
+  width: 75%;
+  padding-left: 10px;
+}
+.post-action {
+  width: 10%;
+}
+.btn-action {
+  margin: 10px;
+  width: 60px;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
 }

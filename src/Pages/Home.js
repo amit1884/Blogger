@@ -31,7 +31,7 @@ function Home() {
   return (
     <>
       <Container className="d-flex  align-items-center flex-column bg-red">
-        <Header />
+        <Header className="bg-red" />
         <MainHeading />
         <br />
         <br />

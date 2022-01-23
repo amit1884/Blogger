@@ -1,15 +1,16 @@
 import React from "react";
 
-function BlogDetails() {
+function BlogDetails(props) {
   return (
     <div className="blog-section">
-      <div className="blog-section-header">Amit Raj</div>
-      <div className="blog-list">
-        <p>Available Blogs</p>
-        <ul>
-          <li>Blog 1</li>
-          <li>Blog 1</li>
-          <li>Blog 1</li>
+      <div className="blog-list-container">
+        <p style={{ borderBottom: "1px solid orange", padding: "10px" }}>
+          <b>All Blogs</b>
+        </p>
+        <ul className="blog-list">
+          {props?.blogs?.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
         </ul>
       </div>
     </div>
