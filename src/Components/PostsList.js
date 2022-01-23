@@ -8,6 +8,7 @@ function PostsList(props) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [postAdded, setPostAdded] = useState(false);
+  const [postDeleted, setPostDeleted] = useState(false);
   const { activeBlog } = props;
   const fetchPost = async () => {
     setLoading(true);
@@ -21,7 +22,7 @@ function PostsList(props) {
   };
   useEffect(() => {
     fetchPost();
-  }, [activeBlog, postAdded]);
+  }, [activeBlog, postAdded, postDeleted]);
   const openForm = () => {
     setOpen(true);
     setPostAdded(false);
@@ -31,11 +32,18 @@ function PostsList(props) {
       <div className="post-header d-flex justify-content-around align-items-center">
         <h2>{activeBlog.title}</h2>
         <button
-          className="btn-action btn-add"
+          className="btn-action btn-add d-flex mb-btn"
           style={{ width: "100px" }}
           onClick={openForm}
         >
-          <span>+</span>&nbsp;&nbsp;Add Post
+          <span>+</span>
+          <span id="mb-text">Add Post</span>
+        </button>
+        <button
+          className="btn-action drawer-btn"
+          onClick={() => props.setOpenDrawer(true)}
+        >
+          Menu
         </button>
       </div>
       {loading && (
@@ -46,7 +54,14 @@ function PostsList(props) {
       {!loading && (
         <div className="posts-list">
           {posts?.map((item) => {
-            return <SinglePost postData={item} key={item.id} />;
+            return (
+              <SinglePost
+                postData={item}
+                key={item.id}
+                setPostDeleted={setPostDeleted}
+                postDeleted={postAdded}
+              />
+            );
           })}
         </div>
       )}

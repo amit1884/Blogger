@@ -33,6 +33,11 @@
   justify-content: center;
   box-shadow: 1px 1px 10px lightgray;
 }
+@media (max-width: 800px) {
+  .google-btn {
+    width: 200px;
+  }
+}
 
 .bg-red {
   background-color: #bc382e;

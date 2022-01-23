@@ -1,12 +1,47 @@
-import React from "react";
+import Cookies from "js-cookie";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import { months } from "../assets/helper/helper";
 import Card from "./Card";
 
 function SinglePost(props) {
-  const { postData } = props;
+  const { postData, setPostDeleted, postDeleted } = props;
+  const [deleting, setDeleting] = useState(false);
+
+  const deletePost = async () => {
+    console.log("Before", postDeleted);
+    setDeleting(true);
+    setPostDeleted(false);
+
+    const accessToken = Cookies.get("accessToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + accessToken);
+
+    let requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}${postData.blog.id}/posts/${postData.id}`,
+        requestOptions
+      );
+      console.log(response.ok);
+      setDeleting(false);
+      setPostDeleted(true);
+    } catch (err) {
+      console.log(err);
+      setDeleting(false);
+      swal({
+        icon: "warning",
+        title: "Something went wrong",
+      });
+    }
+  };
   return (
-    <Card className="d-flex align-items-center">
+    <Card className="d-flex align-items-center responsive">
       <div className="post-thumbnail d-flex justify-content-center align-items-center">
         <img src={postData.author.image.url} alt="" />
       </div>
@@ -40,7 +75,9 @@ function SinglePost(props) {
           <button className="btn-action btn-edit">Edit</button>
         </div>
         <div>
-          <button className="btn-action btn-delete">Delete</button>
+          <button className="btn-action btn-delete" onClick={deletePost}>
+            {deleting ? "Loading..." : "Delete"}
+          </button>
         </div>
       </div>
     </Card>

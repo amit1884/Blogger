@@ -40,7 +40,7 @@ function Header(props) {
               <img src={state?.pic} alt="" className="user-pic" />
             </span>
             &nbsp;&nbsp;
-            <span>{state?.email}</span>
+            <span id="topemail">{state?.email}</span>
           </Link>
 
           <GoogleLogout

@@ -1,13 +1,20 @@
 import React from "react";
 import Spinner from "./Spinner";
-
 function BlogDetails(props) {
   return (
-    <div className="blog-section">
+    <div className={`blog-section ${props.openDrawer ? "active" : ""}`}>
       <div className="blog-list-container">
-        <p style={{ borderBottom: "1px solid orange", padding: "10px" }}>
-          <b>All Blogs</b>
-        </p>
+        <div className="d-flex" style={{ borderBottom: "1px solid orange" }}>
+          <p style={{ padding: "10px" }}>
+            <b>All Blogs</b>
+          </p>
+          <button
+            className="btn-close responsive-btn"
+            onClick={() => props.setOpenDrawer(false)}
+          >
+            X
+          </button>
+        </div>
         {props.loading && (
           <div
             style={{ width: "300px", height: "100vh" }}

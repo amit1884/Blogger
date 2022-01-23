@@ -9,6 +9,8 @@ function Blogs() {
   const [blogs, setBlogs] = useState(null);
   const [activeBlog, setActiveBlog] = useState({});
   const [loading, setLoading] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   const fetchBlog = async () => {
     setLoading(true);
     const accessToken = Cookies.get("accessToken");
@@ -46,8 +48,10 @@ function Blogs() {
           blogs={blogs}
           setActiveBlog={setActiveBlog}
           loading={loading}
+          setOpenDrawer={setOpenDrawer}
+          openDrawer={openDrawer}
         />
-        <PostsList activeBlog={activeBlog} />
+        <PostsList activeBlog={activeBlog} setOpenDrawer={setOpenDrawer} />
       </main>
     </Container>
   );
