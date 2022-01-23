@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "./Spinner";
 
 function BlogDetails(props) {
   return (
@@ -7,11 +8,32 @@ function BlogDetails(props) {
         <p style={{ borderBottom: "1px solid orange", padding: "10px" }}>
           <b>All Blogs</b>
         </p>
-        <ul className="blog-list">
-          {props?.blogs?.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
+        {props.loading && (
+          <div
+            style={{ width: "300px", height: "100vh" }}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <Spinner width="50px" height="50px" />
+          </div>
+        )}
+        {!props.loading && (
+          <ul className="blog-list">
+            {props?.blogs?.map((item) => (
+              <li
+                key={item.id}
+                onClick={() =>
+                  props.setActiveBlog({
+                    title: item.name,
+                    id: item.id,
+                    postLink: item.posts.selfLink,
+                  })
+                }
+              >
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

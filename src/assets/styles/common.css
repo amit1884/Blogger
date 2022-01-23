@@ -44,14 +44,19 @@
   background-color: #fff;
 }
 .main {
-  min-height: 90vh;
+  width: 100vw;
+  padding: 10px;
+  position: relative;
+  min-height: 100vh;
   margin: 0;
 }
 
 .p-0 {
   padding: 0 !important;
 }
-
+.m-10 {
+  margin: 10px;
+}
 .card {
   background-color: #fff;
   border: 1px solid lightgray;
@@ -77,4 +82,48 @@
 .btn-delete {
   background-color: firebrick;
   color: #fff;
+}
+.text-tiny {
+  font-size: 12px;
+}
+
+.text-primary {
+  color: orangered;
+}
+
+/* Spinner */
+.spinner-container {
+  width: 900px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid orangered;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

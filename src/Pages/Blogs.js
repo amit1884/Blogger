@@ -7,9 +7,10 @@ import PostsList from "../Components/PostsList";
 
 function Blogs() {
   const [blogs, setBlogs] = useState(null);
-  const [postLink, setPostLink] = useState("");
   const [activeBlog, setActiveBlog] = useState({});
+  const [loading, setLoading] = useState(false);
   const fetchBlog = async () => {
+    setLoading(true);
     const accessToken = Cookies.get("accessToken");
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + accessToken);
@@ -27,8 +28,12 @@ function Blogs() {
     const data = await response.json();
     console.log(data);
     setBlogs(data.items);
-    setPostLink(data.items[0].posts.selfLink);
-    setActiveBlog({ title: data.items[0].name, id: data.items[0].id });
+    setActiveBlog({
+      title: data.items[0].name,
+      id: data.items[0].id,
+      postLink: data.items[0].posts.selfLink,
+    });
+    setLoading(false);
   };
   useEffect(() => {
     fetchBlog();
@@ -39,10 +44,10 @@ function Blogs() {
       <main className="d-flex main bg-white">
         <BlogDetails
           blogs={blogs}
-          setPostLink={setPostLink}
           setActiveBlog={setActiveBlog}
+          loading={loading}
         />
-        <PostsList postLink={postLink} activeBlog={activeBlog} />
+        <PostsList activeBlog={activeBlog} />
       </main>
     </Container>
   );

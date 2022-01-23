@@ -21,7 +21,17 @@ function Header(props) {
       className={`header-container d-flex align-items-center justify-content-around ${props?.className}`}
     >
       <div className="brand">
-        <p>Blogger</p>
+        <Link
+          to="/blogs"
+          className="d-flex align-items-center"
+          style={{ textDecoration: "none", fontSize: "20px", color: "#fff" }}
+        >
+          <img
+            src="http://www.blogger.com/img/blogger_logo_round_35.png"
+            alt=""
+          />
+          &nbsp;&nbsp;&nbsp;<strong>Blogger</strong>
+        </Link>
       </div>
       {Cookies.get("accessToken") && (
         <div className="links d-flex">

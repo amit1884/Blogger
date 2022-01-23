@@ -31,7 +31,7 @@ const AllRoutes = () => {
         <Route path="/blogs" element={<Blogs />} />
       </Routes>
       <Routes>
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/post/:b_id/:p_id" element={<Post />} />
       </Routes>
     </>
   );
