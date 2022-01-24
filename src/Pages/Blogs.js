@@ -24,7 +24,7 @@ function Blogs() {
     };
 
     const response = await fetch(
-      "https://www.googleapis.com/blogger/v3/users/self/blogs?",
+      "https://www.googleapis.com/blogger/v3/users/self/blogs",
       requestOptions
     );
     const data = await response.json();

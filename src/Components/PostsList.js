@@ -59,6 +59,7 @@ function PostsList(props) {
                 key={item.id}
                 postArray={posts}
                 setPosts={setPosts}
+                setPostAdded={setPostAdded}
               />
             );
           })}
@@ -70,6 +71,7 @@ function PostsList(props) {
           setOpen={setOpen}
           b_id={activeBlog.id}
           setPostAdded={setPostAdded}
+          type="ADD"
         />
       )}
     </div>

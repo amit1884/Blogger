@@ -5,13 +5,13 @@ import Card from "../Card";
 import Backdrop from "./Backdrop";
 
 function AddPostForm(props) {
-  const { b_id, setOpen, setPostAdded } = props;
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const { b_id, setOpen, setPostAdded, type, data } = props;
+  const [title, setTitle] = useState(data?.title ? data.title : "");
+  const [description, setDescription] = useState(
+    data?.content ? data?.content : ""
+  );
   const [loading, setLoading] = useState(false);
-  const AddPost = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const AddPost = async () => {
     if (title || description) {
       const accessToken = Cookies.get("accessToken");
       var myHeaders = new Headers();
@@ -59,16 +59,82 @@ function AddPostForm(props) {
       setLoading(false);
     }
   };
+
+  const EditPost = async () => {
+    if (title && description) {
+      let editData = {
+        kind: "blogger#post",
+        id: data?.id,
+        blog: {
+          id: data?.blog.id,
+        },
+        url: data?.url,
+        selfLink: data?.selfLink,
+        title: title,
+        content: description,
+      };
+
+      const accessToken = Cookies.get("accessToken");
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + accessToken);
+      myHeaders.append("Content-Type", "application/json");
+      console.log(editData);
+
+      let requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        redirect: "follow",
+        body: JSON.stringify(editData),
+      };
+
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}${data?.blog.id}/posts/${data?.id}`,
+          requestOptions
+        );
+        setLoading(false);
+
+        if (response.ok) {
+          setOpen(false);
+          setPostAdded(true);
+        } else {
+          swal({
+            icon: "warning",
+            title: "Update Failure",
+          });
+        }
+      } catch (err) {
+        console.log(err);
+        swal({
+          icon: "warning",
+          title: "Something Went Wrong",
+        });
+      }
+    } else {
+      swal({
+        icon: "warning",
+        title: "All Fields are required !",
+      });
+      setLoading(false);
+    }
+  };
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (type === "ADD") AddPost();
+    else EditPost();
+  };
   return (
     <Backdrop>
       <Card>
         <h2 className="text-primary">
-          <u>Add Form</u>
+          <u>{type === "EDIT" ? "Edit Form" : "Add Form"}</u>
         </h2>
         <button className="btn-close" onClick={() => setOpen(false)}>
           X
         </button>
-        <form className="post-form" onSubmit={AddPost}>
+        <form className="post-form" onSubmit={submitHandler}>
           <div>
             <label htmlFor="title">Title</label>
             <br />

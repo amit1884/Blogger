@@ -14,6 +14,11 @@
   position: relative;
 }
 
+@media (max-width: 991px) {
+  .card {
+    width: 90% !important;
+  }
+}
 .btn-close {
   position: absolute;
   top: 10px;

@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { months } from "../assets/helper/helper";
 import Card from "./Card";
+import AddPostForm from "./Modals/AddPostForm";
 
 function SinglePost(props) {
   const { postData, postArray, setPosts } = props;
   const [deleting, setDeleting] = useState(false);
-
+  const [open, setOpen] = useState(false);
   const deletePost = async () => {
     setDeleting(true);
 
@@ -75,7 +76,9 @@ function SinglePost(props) {
           <button className="btn-action btn-view">View</button>
         </Link>
         <div>
-          <button className="btn-action btn-edit">Edit</button>
+          <button className="btn-action btn-edit" onClick={() => setOpen(true)}>
+            Edit
+          </button>
         </div>
         <div>
           <button className="btn-action btn-delete" onClick={deletePost}>
@@ -83,6 +86,14 @@ function SinglePost(props) {
           </button>
         </div>
       </div>
+      {open && (
+        <AddPostForm
+          setOpen={setOpen}
+          type="EDIT"
+          data={postData}
+          setPostAdded={props.setPostAdded}
+        />
+      )}
     </Card>
   );
 }
