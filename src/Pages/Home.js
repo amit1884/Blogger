@@ -5,7 +5,7 @@ import Header from "../Components/Header";
 import MainHeading from "../Components/MainHeading";
 import BgImg from "../assets/images/1.png";
 import "../assets/styles/style.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { UserContext } from "../App";
 function Home() {
@@ -36,15 +36,27 @@ function Home() {
         <br />
         <br />
         <div>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_CLIENT_ID}
-            buttonText="Sign In"
-            scope="https://www.googleapis.com/auth/blogger"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-            className="google-btn"
-          />
+          {!Cookies.get("accessToken") && (
+            <GoogleLogin
+              clientId={process.env.REACT_APP_CLIENT_ID}
+              buttonText="Sign In"
+              scope="https://www.googleapis.com/auth/blogger"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+              className="google-btn"
+            />
+          )}
+          {Cookies.get("accessToken") && (
+            <Link to="/blogs">
+              <button
+                className="btn-action btn-add"
+                style={{ width: "200px", padding: "20px", borderRadius: "5px" }}
+              >
+                View Blogs
+              </button>
+            </Link>
+          )}
         </div>
         <div className="d-flex justify-content-center">
           <img src={BgImg} alt="" className="home-img" />

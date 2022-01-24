@@ -8,7 +8,6 @@ function PostsList(props) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [postAdded, setPostAdded] = useState(false);
-  const [postDeleted, setPostDeleted] = useState(false);
   const { activeBlog } = props;
   const fetchPost = async () => {
     setLoading(true);
@@ -22,7 +21,7 @@ function PostsList(props) {
   };
   useEffect(() => {
     fetchPost();
-  }, [activeBlog, postAdded, postDeleted]);
+  }, [activeBlog, postAdded]);
   const openForm = () => {
     setOpen(true);
     setPostAdded(false);
@@ -58,8 +57,8 @@ function PostsList(props) {
               <SinglePost
                 postData={item}
                 key={item.id}
-                setPostDeleted={setPostDeleted}
-                postDeleted={postAdded}
+                postArray={posts}
+                setPosts={setPosts}
               />
             );
           })}

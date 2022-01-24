@@ -6,13 +6,11 @@ import { months } from "../assets/helper/helper";
 import Card from "./Card";
 
 function SinglePost(props) {
-  const { postData, setPostDeleted, postDeleted } = props;
+  const { postData, postArray, setPosts } = props;
   const [deleting, setDeleting] = useState(false);
 
   const deletePost = async () => {
-    console.log("Before", postDeleted);
     setDeleting(true);
-    setPostDeleted(false);
 
     const accessToken = Cookies.get("accessToken");
     var myHeaders = new Headers();
@@ -30,7 +28,12 @@ function SinglePost(props) {
       );
       console.log(response.ok);
       setDeleting(false);
-      setPostDeleted(true);
+
+      let tempost = [...postArray];
+      let idx = tempost.findIndex((item) => item.id);
+      console.log(idx);
+      tempost.splice(idx, 1);
+      setPosts(tempost);
     } catch (err) {
       console.log(err);
       setDeleting(false);
